@@ -3,8 +3,8 @@ spring:
     name: serie-service
   data:
     mongodb:
-      authentication-database: admin
-      uri: mongodb://localhost:27017/SeriesFinalDB
+      authentication-database: root
+      uri: mongodb://db-mongo-serie:27017/series-final-db
       repositories:
         enabled: true
   rabbitmq:
@@ -13,8 +13,13 @@ spring:
     host: localhost
     port: 5672
   zipkin:
-    base-url: http://localhost:9411/
+    base-url: http://zipkin:9411/
     enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
 
 queue:
   serie:
@@ -28,6 +33,6 @@ eureka:
     fetchRegistry: false
     registerWithEureka: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-service:8761/eureka
   instance:
     preferIpAddress: true
